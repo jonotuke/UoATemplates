@@ -1,0 +1,112 @@
+---
+title: "SMI Exam"
+params:
+  mark_scheme: no
+author: "Jono Tuke"
+date: "Semester 2, 2018"
+courseNameShort: "Stat Model \\& Inference II"
+courseName: "Statistical Modelling \\& Inference II"
+courseID: "104843"
+catNo: "STATS 2107"
+ExamTime: 120
+TotalTime: 130
+Q: "`r knitr::load_cache('number_questions', 'NQ')`"
+marks: "`r knitr::load_cache('final_mark', 'ET')`"
+calculator: TRUE
+dict: TRUE
+cheatsheet: FALSE
+solutions: FALSE
+output: UoATemplates::standard_exam
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE
+)
+library(tidyverse)
+library(tidyverse)
+library(tidyverse)
+library(kableExtra)
+library(UoATemplates)
+## Marks
+number_Q  <- 0
+total  <- 0
+exam_total  <- 0
+```
+
+
+1. Consider the data $Y_1, Y_2, \ldots, Y_n$ such that
+$$
+Y_i \sim N(\mu, \sigma^2). 
+$$
+Let 
+$$
+\bar{Y} = \frac{1}{n}\sum^n_{i = 1}Y_i. 
+$$
+    a. Show that
+$$
+E[\bar Y] = \mu.
+$$
+```{r, results='asis'}
+marks(3)
+```
+\begin{solutions}
+$$
+\begin{aligned}
+E[\bar Y] &= 
+E\left[
+\frac{1}{n}\sum^n_{i = 1}Y_i
+\right]\\
+&= \frac{1}{n}\sum^n_{i = 1}E[Y_i]\\
+&= \frac{1}{n}\sum^n_{i = 1}\mu\\
+&= \mu. 
+\end{aligned}
+$$
+\end{solutions}
+    b. Consider the R code in Appendix A. Describe what is does. 
+```{r, results='asis'}
+marks(4)
+```
+\begin{solutions}
+Description of code.
+\end{solutions}
+    c. Describe the scatterplot in Appendix B. 
+```{r, results='asis'}
+marks(5)
+```
+\begin{solutions}
+Negative, strong, non-linear relationship.
+\end{solutions}
+```{r, results='asis'}
+question_total()
+```
+
+
+
+
+```{r final_mark, cache=TRUE}
+ET  <- exam_total
+```
+```{r number_questions, cache=TRUE}
+NQ  <- number_Q
+```
+
+
+\newpage
+
+**Appendix A**
+
+```{r}
+y <- rnorm(10)
+mean(y)
+```
+
+**Appendix B**
+
+```{r}
+data(mpg)
+mpg %>% 
+  ggplot(aes(displ, cty)) + geom_point() + theme_minimal()
+```
+\label{page:LastPage}

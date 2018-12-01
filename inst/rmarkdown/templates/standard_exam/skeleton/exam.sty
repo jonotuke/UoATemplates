@@ -1,0 +1,617 @@
+%% exam_2007.sty
+%%
+%% 8 April 1996		Begun		Greg Lewis
+%%	# Copied over from ce.sty
+%%	# Altered page headings from empty to {\bf Page \thepage}
+%%	# Altered margins to allow these headings.
+%%
+%% 31 May 1996		Version 1.0	Greg Lewis
+%%	# Altered margins
+%%	# Altered page headings to cope with the cover page
+%%	# Added \makecover and the associated commands to generate a cover
+%%	  page.
+%%	# Added \marks and \mark commands.
+%%
+%% 3 June 1996		Version 1.0a	Greg Lewis
+%%	# Suggestions (and code) from Bill Venables added.  These include:
+%%	# "Page Y of X" for page right header.
+%%	# "Please turn over for Page X" for footer.
+%%	# Automation of question count and of page count indicators on
+%%	  cover page.
+%%	# Make it work for the Statistics department.
+%%	# From me:
+%%	# "Final page" footer on last page.
+%%
+%% 4 June 1996		Version 1.0b	Greg Lewis
+%%	# Suggestions from Michael Murray:
+%%	# Subject name optionally set as left header.
+%%	# \topnote command for a note at the head of the first page after
+%%	  the cover.
+%%	# From me:
+%%	# Added back in the \totalquestions command since count can be lost
+%%	  if we have more than one section with question lists for each.
+%%	# Added \ds as shorthand for \displaystyle
+%%
+%% 11 June 1996		Version 1.0c	Greg Lewis
+%%	# Suggestions from Nigel Bean:
+%%	# Long subject names are now split over multiple lines (oops).
+%%	# Optionally the left header need not be the subject name but it
+%%	  can be specified with an optional argument to \subjectname in
+%%	  [ ], viz. \subjectname[Running head]{Subject Name}.
+%%	# LaTeX is enouraged no to do a page break before putting the marks
+%%	  for a question (\nopagebreak) but it may still add a page break
+%% 	  in some cases (text _cannot_ be longer than \textheight).
+%%	# From me:
+%%	# Information on package with \ProvidesPackage.
+%%	# Used \RequirePackage instead of \usepackage.
+%%	# Declared an "eqquenum" option for numbering equations within a
+%%	  question properly (needs trialling though).
+%%
+%% 11 November 1996	Version 1.0d	Greg Lewis
+%%	# Altered topmargin slightly so footer wasn't so close to bottom of
+%%	  the page (suggestion from Nigel Bean).
+%%	# Added an eqquenum option which numbers equations within the
+%%        question, i.e. equations are numbered as (question.equation)
+%%
+%% 12 November 1996	Version 1.0e	Greg Lewis
+%%	# Added \levellinereplace command for doing exams that are Maths
+%%	  exams, but in other departments.
+%%	# Added queparind option which makes paragraph breaks indented in
+%%	  the various question environments (requested by Ernie Tuck).
+%%
+%% 9 December 1996	Version 1.0f	Greg Lewis
+%%	# Altered vertical gaps between items and paragraphs in the various
+%%	  question environments.
+%%
+%% 2004 Jim Denier
+%%  changed to now look like the new University rubric. no comments
+%% included. should be obvious to anyone who uses latex.
+%%
+%% 2004 Michael Murray
+%%  16 June: Added Paul's solution to the \marks problem
+%%
+%% I added the supp exam option.
+%% Sets up some environments and commands we may find useful for doing
+%% exams.
+%%
+%% 6 April 2006 Paul McCann
+%% Changed names of variable to better reflect standard usage
+%% [coursecode => CatalogNbr]
+%% [subjectname => CourseName]
+%% [subjectcode => CourseID]
+%% [degree => School]
+%% 
+%% 20 March 2007 Paul McCann
+%% Minor corrections (very minor!) for 2007
+%%
+%% 5 April 2012 Gary Glonek
+%% Included provision for multiple course names in title
+%% Changed gaps on title page from fixed units to \fill
+\ProvidesPackage{exam}[2014/04/30]
+
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+%\RequirePackage{graphicx}
+
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+\pdffalse % we are not running PDFLaTeX
+\else
+\pdfoutput=1 % we are running PDFLaTeX
+\pdftrue
+\fi
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+%%
+%% Require fancyheadings and ifthen
+%%
+%% \RequirePackage{fancyheadings}
+\RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
+
+%%
+%% Options for this style file
+%%
+\DeclareOption{eqquenum}{\numberwithin{equation}{question@counter}}
+
+%%
+%% Our margins, etc.
+%% 23.12.97: \topmargin was changed from -0.5cm to -1cm
+%%
+\addtolength{\topmargin}{-1cm}
+\setlength{\headheight}{1.6cm}
+\setlength{\headsep}{0.5cm}
+\setlength{\textwidth}{17cm}
+\setlength{\evensidemargin}{-0.5cm}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\textheight}{22.5cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3ex}
+
+%%
+%% Set page headings
+%%
+\newcounter{nextpage}
+\newboolean{SubjectOnLeft}
+\pagestyle{fancyplain}
+\rhead[
+       \fancyplain{}{
+          \ifthenelse{\boolean{SubjectOnLeft}}{%
+             \ifx\@leftsubjecthead\undefined
+                {\bfseries\@CourseName}
+                \vfill
+             \else
+                {\bfseries\@leftsubjecthead}
+                \vfill
+             \fi
+          }{}
+       }
+      ]
+      {
+       \fancyplain{
+        \ifpdf
+        \includegraphics[scale=0.80]{ualogo_mono.pdf}
+        \else
+          \includegraphics[scale=0.80]{ualogo_mono.eps}
+          \fi
+       }
+       {{\bfseries Page \thepage\ of \pageref{page:LastPage}}\vfill}
+      }
+\lhead[
+       \fancyplain{
+          \begin{tabular}{l@{\quad}r}
+          \protect{[}No.\ of pages: & \pageref{page:LastPage}\protect{]} \\
+          \ifx\@totalquestions\undefined
+              \protect{[}No.\ of questions: & \ref{page:LastPage}\protect{]} \\
+          \else
+              \protect{[}No.\ of questions: & \@totalquestions{]} \\
+          \fi
+          \ifx\@totalmarks\undefined
+          \else
+              \\ [Total marks: & \@totalmarks{]}
+          \fi
+          \end{tabular}
+       }
+       {{\bfseries Page \thepage\ of \pageref{page:LastPage}}\vfill}
+      ]
+      {
+       \fancyplain{}{
+          \ifthenelse{\boolean{SubjectOnLeft}}{%
+             \ifx\@leftsubjecthead\undefined
+                {\bfseries\@CourseName}
+                \vfill
+             \else
+                {\bfseries\@leftsubjecthead}
+                \vfill
+             \fi
+          }{}
+       }
+      }
+\cfoot{%
+   \fancyplain{}{%
+      \protect{\ifthenelse{\equal{\thepage}{\pageref{page:LastPage}}}%
+         {%
+            \ifx\@finalnote\undefined%
+               {\bfseries Final page}%
+            \else%
+               {\@finalnote}%
+            \fi%
+         }%
+         {%
+            \setcounter{nextpage}{\value{page}}\stepcounter{nextpage}%
+            {\bfseries Please turn over for page \arabic{nextpage}}%
+         }}%
+   }%
+}
+
+\renewcommand{\headrulewidth}{0pt}
+
+%%
+%% Set up commands that let us make covers the easy way!
+%%
+\def\totalquestions#1{%
+  \def\@totalquestions{#1}
+}
+\def\totalmarks#1{%
+  \def\@totalmarks{#1}
+}
+\def\totalpages#1{%
+  \def\@totalpages{#1}
+}
+\def\answerall#1{%
+  \def\@answerall{#1}
+}
+\def\examparts#1{%
+  \def\@examparts{#1}
+}
+\def\department#1{%
+  \def\@department{#1}
+}
+\def\departmentlinereplace#1{%
+  \def\@departmentlinereplace{#1}%
+}
+\def\materialsa#1{%
+   \def\@materialsa{#1}
+}
+\def\materialsb#1{%
+   \def\@materialsb{#1}
+}
+\def\instructiona#1{%
+   \def\@instructiona{#1}
+}
+\def\instructionb#1{%
+   \def\@instructionb{#1}
+}
+\def\instructionc#1{%
+   \def\@instructionc{#1}
+}
+\def\nobooks#1{%
+   \def\@nobooks{#1}
+}
+\def\colorbooks#1{%
+   \def\@colorbooks{#1}
+}
+\def\graphpaper#1{%
+   \def\@graphpaper{#1}
+}
+\def\calculators#1{%
+   \def\@calculators{#1}
+}
+\def\formulasheet#1{%
+   \def\@formulasheet{#1}
+}
+\def\level#1{%
+   \def\@level{#1}
+}
+\def\levellinereplace#1{%
+   \def\@levellinereplace{#1}
+}
+\def\examdate#1{%
+   \def\@examdate{#1}
+}
+\def\examtime#1{%
+   \def\@examtime{#1}
+}
+\def\totaltime#1{%
+   \def\@totaltime{#1}
+}
+\def\readingtime#1{%
+   \def\@readingtime{#1}
+}
+\def\CourseID#1{%
+   \def\@CourseID{#1}
+}
+\def\CourseIDa#1{%
+   \def\@CourseIDa{#1}
+}
+\def\CourseIDb#1{%
+   \def\@CourseIDb{#1}
+}
+\def\CourseIDc#1{%
+   \def\@CourseIDc{#1}
+}
+\def\CourseIDd#1{%
+   \def\@CourseIDd{#1}
+}
+\def\CatalogNbr#1{%
+   \def\@CatalogNbr{#1}
+}
+\def\CatalogNbra#1{%
+   \def\@CatalogNbra{#1}
+}
+\def\CatalogNbrb#1{%
+   \def\@CatalogNbrb{#1}
+}
+\def\CatalogNbrc#1{%
+   \def\@CatalogNbrc{#1}
+}
+\def\CatalogNbrd#1{%
+   \def\@CatalogNbrd{#1}
+}
+\def\CourseNamea#1{%
+   \def\@CourseNamea{#1}
+}
+\def\CourseNameb#1{%
+   \def\@CourseNameb{#1}
+}
+\def\CourseNamec#1{%
+   \def\@CourseNamec{#1}
+}
+\def\CourseNamed#1{%
+   \def\@CourseNamed{#1}
+}
+\def\CourseName{%
+   \@ifnextchar[%
+      {\@CourseNamewithhead}%
+      {\@CourseNamewithouthead}%
+}
+\def\@CourseNamewithhead[#1]#2{%
+   \def\@leftsubjecthead{#1}%
+   \setboolean{SubjectOnLeft}{true}
+   \def\@CourseName{#2}%
+}
+\def\@CourseNamewithouthead#1{%
+   \def\@CourseName{#1}
+}
+\def\covernote#1{%
+   \def\@covernote{#1}
+}
+\def\topnote#1{%
+   \def\@topnote{#1}
+}
+\def\School#1{%
+   \def\@School{#1}
+}
+\def\finalnote#1{%
+   \def\@finalnote{#1}
+}
+\newboolean{SpecialExam}
+\newboolean{SupplementaryExam}
+
+\def\makecover{
+   \thispagestyle{plain}
+   \enlargethispage{1.5cm}
+  \vspace*{\fill}
+   \centerline{\bfseries\large Examination in \@School}
+  \vspace*{\fill}
+   \centerline{\bfseries\large \@examdate}
+ %  \vspace*{0.0cm}
+ \vspace*{\fill}
+    \ifthenelse{\boolean{SupplementaryExam}}{%
+       \centerline{\bfseries \large Supplementary Examination}%
+    }{}
+\vspace*{\fill}
+    \ifthenelse{\boolean{SpecialExam}}{%
+       \centerline{\bfseries \large Special Examination}%
+    }{}
+   \vspace*{\fill}
+\begin{center}
+\fbox{
+     \begin{tabular}{llp{9cm}}
+        \vrule height15pt width0pt{\bfseries\large\@CourseID} &{\bfseries\large\@CatalogNbr}&
+        {\bfseries\large\@CourseName}\\[8pt]
+        \ifx\@CourseIDa\undefined
+        \else
+          {\bfseries\large\@CourseIDa} &{\bfseries\large\@CatalogNbra}&
+          {\bfseries\large\@CourseNamea}\\[8pt]
+        \fi
+        \ifx\@CourseIDb\undefined
+        \else
+          {\bfseries\large\@CourseIDb} &{\bfseries\large\@CatalogNbrb}&
+          {\bfseries\large\@CourseNameb}\\[8pt]
+        \fi
+        \ifx\@CourseIDc\undefined
+        \else
+          {\bfseries\large\@CourseIDc} &{\bfseries\large\@CatalogNbrc}&
+          {\bfseries\large\@CourseNamec}\\[8pt]
+        \fi
+        \ifx\@CourseIDd\undefined
+        \else
+          {\bfseries\large\@CourseIDd} &{\bfseries\large\@CatalogNbrd}&
+          {\bfseries\large\@CourseNamed}\\[10pt]
+        \fi
+          \end{tabular}
+}
+\end{center}
+
+\vspace*{\fill}
+\begin{minipage}{\textwidth}
+\begin{tabular}{lr}
+Official Reading Time:& \ensuremath{\@readingtime} mins\\
+Writing Time:& \underline{\ensuremath{\@examtime}\ mins}\\
+Total Duration:& \ensuremath{\@totaltime}\ mins\\
+\end{tabular}
+\end{minipage}
+\ifx\@examparts\undefined
+\begin{center}
+            \ifx\@answerall\undefined%
+\else
+{\bfseries ANSWER ALL QUESTIONS}\\
+\fi
+{\bfseries NUMBER OF QUESTIONS: \@totalquestions
+\qquad TOTAL MARKS: \@totalmarks
+}
+\end{center}
+\else
+\begin{center}
+\@examparts
+\end{center}
+\fi
+\underline{\bfseries Instructions}
+\begin{itemize}
+          \ifx\@instructiona\undefined
+\else
+\item \@instructiona
+\fi
+          \ifx\@instructionb\undefined
+\else
+\item \@instructionb
+\fi
+          \ifx\@instructionc\undefined
+\else
+\item \@instructionc
+\fi
+\item Begin each answer on a new page.
+\item Examination materials must not be removed from the examination
+room.
+\end{itemize}
+\underline{\bfseries Materials}
+\begin{itemize}
+\ifx\@nobooks\undefined
+\item 1 \@colorbooks\ book is provided.
+\else
+\item \@nobooks\ \@colorbooks\ books are provided.
+\fi
+\ifx\@formulasheet\undefined
+\else
+\item Formulae sheets are provided.
+\fi
+\ifx\@graphpaper\undefined
+\else
+\item Graph paper is provided.
+\fi
+\ifx\@calculators\undefined
+\item Calculators are {\bfseries NOT} permitted.
+\else
+\item \@calculators
+\fi
+\ifx\@materialsa\undefined
+\else
+\item \@materialsa
+\fi
+\ifx\@materialsb\undefined
+\else
+\item \@materialsb
+\fi
+\end{itemize}
+\vfill
+\vspace*{\fill}\par
+\begin{center}
+{\bfseries DO NOT COMMENCE WRITING UNTIL INSTRUCTED TO DO SO.}
+\vspace*{\fill}
+\par Page \thepage\ of \pageref{page:LastPage}
+\end{center}
+% \fi
+   \newpage
+   \setcounter{page}{2}
+   \ifx\@topnote\undefined
+   \else
+      \@topnote\par
+   \fi
+}
+
+%%
+%% Set up a variety of list environments.  The main one will be for
+%% numbering the main questions, so will use a arabic numbering counter
+%% followed by a full stop.  The subquestion environment will use an
+%% alphabetic counter in () brackets and the part environment will use
+%% a lower case roman numeral counter.
+%%
+\newlength{\question@parindent}
+\setlength{\question@parindent}{0pt}
+
+%
+% Question
+%
+\newcounter{question@counter}
+\newcounter{total@questions}
+\setcounter{total@questions}{0}
+
+%%
+%% Number equations within questions
+%%
+\DeclareOption{eqquenum}{\numberwithin{equation}{question@counter}}
+\DeclareOption{queparind}{\setlength{\question@parindent}{2.5ex}}
+
+%%
+%% Process all options that are input to this package
+%%
+\ProcessOptions
+%
+\newenvironment{questions}{%
+\rm
+\begin{list}{$\mathrm{\arabic{question@counter}.}$}%
+{\usecounter{question@counter}
+\setlength{\topsep}{2ex plus 0.5ex minus 0.5ex}
+\setlength{\partopsep}{\z@}
+\setlength{\itemsep}{2ex plus 0.5ex minus 0.5ex}
+\setlength{\parsep}{1.0ex plus 0.25ex minus 0.25ex}
+\setlength{\leftmargin}{2em}
+\setlength{\rightmargin}{0pt}
+\setlength{\listparindent}{0pt}
+\setlength{\itemindent}{0pt}
+\setlength{\labelsep}{0.5em}
+\setlength{\labelwidth}{1.5em}
+\setlength{\listparindent}{\question@parindent}
+}}%
+{\addtocounter{total@questions}{\value{question@counter}}%
+ \setcounter{question@counter}{\value{total@questions}}%
+ \label{page:LastPage}\end{list}}
+
+%
+% Part
+%
+\newcounter{cepart@counter}
+%
+\newenvironment{parts}{%
+\begin{list}{$\mathrm{(\alph{cepart@counter})}$}%
+{\usecounter{cepart@counter}
+\setlength{\topsep}{\z@}
+\setlength{\partopsep}{\z@}
+\setlength{\itemsep}{1.0ex plus 0.25ex minus 0.25ex}
+\setlength{\parsep}{0.5ex plus 0.125ex minus 0.125ex}
+\setlength{\leftmargin}{2em}
+\setlength{\rightmargin}{0pt}
+\setlength{\listparindent}{0pt}
+\setlength{\itemindent}{0pt}
+\setlength{\labelsep}{0.5em}
+\setlength{\labelwidth}{1.5em}
+\setlength{\listparindent}{\question@parindent}
+}}%
+{\end{list}}
+
+%
+% Sub Part
+%
+\newcounter{cesubpart@counter}
+%
+\newenvironment{subparts}{%
+\begin{list}{$\mathrm{(\roman{cesubpart@counter})}$}%
+{\usecounter{cesubpart@counter}
+\setlength{\topsep}{\z@}
+\setlength{\partopsep}{\z@}
+\setlength{\itemsep}{1.0ex plus 0.25ex minus 0.25ex}
+\setlength{\parsep}{0.5ex plus 0.125ex minus 0.125ex}
+\setlength{\leftmargin}{2em}
+\setlength{\rightmargin}{0pt}
+\setlength{\listparindent}{0pt}
+\setlength{\itemindent}{0pt}
+\setlength{\labelsep}{0.5em}
+\setlength{\labelwidth}{1.5em}
+\setlength{\listparindent}{\question@parindent}
+}}%
+{\end{list}}
+
+%%
+%% Miscellaneous helpful commands
+%%
+% Used for "harder" question in some assignments
+\newcommand{\staritem}{\stepcounter{question@counter}%
+\item[\arabic{question@counter}$\overset{\displaystyle*}{\displaystyle.}$]}
+
+\newcommand{\ds}{\displaystyle}
+\renewcommand{\familydefault}{cmss}
+
+%%
+%% Specify the marks at the end of a question.
+%%
+%        \ifx\@marks\undefined
+%\renewcommand{\marks}[1]{\nopagebreak${}$\hfill{[#1\ marks]}}
+%\renewcommand{\marks}[1]{\nopagebreak${}$\hfill{[#1\ marks]}}
+%\else
+%%\renewcommand{\marks}[1]{\nopagebreak${}$\hfill{[#1\ marks]}}
+%\fi
+%\renewcommand{\mark}{\nopagebreak${}$\hfill{[1\ mark]}}
+%\newcommand{\qmarks}[1]{\nopagebreak${}$\hfill{[TOTAL #1\ marks]}}
+
+%%
+%\endinput
+%%
+%% Specify the marks at the end of a question.
+%% Let's try and sneak around the existence of "marks".
+\providecommand{\marks}[1]{\nopagebreak${}$\hfill{[#1\ marks]}}
+\renewcommand{\marks}[1]{\nopagebreak${}$\hfill{[#1\ marks]}}
+
+\renewcommand{\mark}{\nopagebreak${}$\hfill{[1\ mark]}}
+\newcommand{\qmarks}[1]{\nopagebreak${}$\hfill{[TOTAL #1\ marks]}}
+
+%%
+\endinput
+

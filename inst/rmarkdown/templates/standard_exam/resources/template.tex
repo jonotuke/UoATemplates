@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper]{geometry}
+% \usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{versions}
+
+\usepackage{exam}
+
+\School{School of Mathematical Sciences}
+
+%%% \examdate contains the semester/year in which the course was held
+\examdate{$date$}
+
+%%% \CourseID can be found via http://access.adelaide.edu.au
+\CourseID{$courseID$}
+
+%%% Specify up to 4 additional CourseIDs (a,b,c,d)
+%%% for courses using the same paper
+% \CourseIDa{103456}
+% \CourseIDb{103457}
+
+%%% Use a \CourseName of the form
+%%%
+% \CourseName[Topology]{Topology and Analysis III}
+%%%
+%%% if you would like "Topology" printed on the left hand side 
+%%% at the top of each page. Otherwise use a simple
+%%%
+% \Coursename{Topology and Analysis}
+%%%
+%%% and indicate whether or not *this* \Coursename should be printed
+%%% on the left hand side at the top of each following page using
+%%% the \setboolean{SubjectOnLeft}{true} line listed  below.  
+\CourseName[$courseNameShort$]{$courseName$}
+
+%%% Specify up to 4 additional CourseNames for courses using the same paper
+%%% Specify a generic heading in the \CourseName[...] (above) if using 
+%%% same paper for multiple courses 
+% \CourseNamea{Topologia and Analytica III - Bradford}
+% \CourseNameb{Topologia and Analytica - PG}
+
+% See the comments for \CourseName above...
+\setboolean{SubjectOnLeft}{true}
+
+
+%%% \CatalogNbr is the Catalog number of the subject
+%%% Again, see Access Adelaide if you don't know this.
+\CatalogNbr{$catNo$}
+
+%%% Specify up to 4 additional CatalogNbrs for courses using the same paper
+% \CatalogNbra{PURE MTH 3333BR}
+% \CatalogNbrb{PURE MTH 7333}
+
+%%% Uncomment the line it's a supp. ie, remove the "%" sign. 
+% \setboolean{SupplementaryExam}{true}
+
+%%% Uncomment the next line if it's a special exam paper
+% \setboolean{SpecialExam}{true}
+
+
+%%% \readingtime is the number of minutes for reading the exam
+\readingtime{10}
+
+%%% \examtime is the number of minutes for writing solutions 
+\examtime{$ExamTime$}
+
+%%% \totaltime is \readingtime plus \examtime
+\totaltime{$TotalTime$}
+
+%%% \totalquestions is the number of questions in the paper.
+\totalquestions{$Q$}
+
+%%% \totalmarks is the total number of marks for the paper.
+\totalmarks{$marks$}
+
+%%% \nobooks gives the number of books to be used, but should 
+%%% **only be used when this number is greater than one**. 
+% \nobooks{2}
+
+%%% \colorbooks can be Pink or Blue
+\colorbooks{Blue}
+
+%%% Uncomment the next line if a formula sheet will be provided
+% \formulasheet{yes} 
+
+%%% Uncomment the next line if graph paper will be provided
+% \graphpaper{yes}
+
+%%% Choose the appropriate version of the calculator statement
+%%% from the three choices below
+
+% \calculators{Calculators are not permitted.}
+% \calculators{Calculators without remote communications or CAS capability are allowed.}
+$if(calculator)$
+\calculators{Calculators without remote communications capability are allowed.}
+$endif$
+
+%%% Extra instructions if required
+\instructiona{Attempt all questions. }
+%%% Uncomment next line and edit for further instructions to students
+% \instructionb{Get everything right}
+
+%%% Extra materials: uncomment and adjust next line(s)
+$if(dict)$
+\materialsa{English and foreign-language dictionaries may be used.}
+$endif$
+$if(cheatsheet)$
+\materialsb{A single A4 sheet of notes (double-sided, typed or handwritten) is allowed.}
+$endif$
+% \materialsa{More things to bring in}
+% \materialsb{And yet more materials}
+
+%%% Use this section if the exam has multiple parts 
+%%%
+%\examparts{
+%\begin{tabular}{llll}
+%{\bfseries PART } & {\bfseries Questions} & {\bfseries Time} & {\bfseries Marks}\\
+%%%
+%%% put stuff in here
+%%%
+%\end{tabular}
+%}
+
+% \topnote puts a note at the head of the first page after the cover.
+% \topnote{This is to illustrate the topnote capability.}
+
+% Commands for Rmarkdown
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% Statistics commands
+\newcommand{\var}{\text{Var}}
+\newcommand{\MSE}{\text{MSE}}
+\newcommand{\E}{\text{E}}
+
+\newenvironment{solutions}{
+\color{red}Solution:
+
+\color{blue}
+}
+
+$if(solutions)$
+$else$
+\excludeversion{solutions}
+$endif$
+
+\begin{document}
+
+\makecover
+
+$body$
+
+\end{document}
+
