@@ -1,7 +1,5 @@
 ---
 title: "SMI Exam"
-params:
-  mark_scheme: no
 author: "Jono Tuke"
 date: "Semester 2, 2018"
 courseNameShort: "Stat Model \\& Inference II"
@@ -22,7 +20,8 @@ output: UoATemplates::standard_exam
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = FALSE
+  echo = FALSE, 
+  autodep = TRUE
 )
 library(tidyverse)
 library(tidyverse)
@@ -46,7 +45,7 @@ $$
 $$
     a. Show that
 $$
-E[\bar Y] = \mu.
+\E[\bar Y] = \mu.
 $$
 ```{r, results='asis'}
 marks(3)
@@ -54,11 +53,11 @@ marks(3)
 \begin{solutions}
 $$
 \begin{aligned}
-E[\bar Y] &= 
-E\left[
+\E[\bar Y] &= 
+\E\left[
 \frac{1}{n}\sum^n_{i = 1}Y_i
 \right]\\
-&= \frac{1}{n}\sum^n_{i = 1}E[Y_i]\\
+&= \frac{1}{n}\sum^n_{i = 1}\E[Y_i]\\
 &= \frac{1}{n}\sum^n_{i = 1}\mu\\
 &= \mu. 
 \end{aligned}
@@ -81,14 +80,43 @@ Negative, strong, non-linear relationship.
 ```{r, results='asis'}
 question_total()
 ```
+1. Consider a random variable $X$ such that
+$$
+\E[X] = 4, \quad \var(X) = 3
+$$
+Let
+$$
+Y = 3X + 1
+$$
+    a. Calculate $E[Y]$. 
+```{r, results='asis'}
+marks(2)
+```
+\begin{solutions}
+$$
+\E[Y] = \E[3X + 1] = 3\E[X] + 1 = 3(4) + 1 = 13.
+$$
+\end{solutions}
+    b. Calculate $\var(Y)$.
+```{r, results='asis'}
+marks(2)
+```
+\begin{solutions}
+$$
+\var(Y) = \var(3X + 1) = 3^2\times\var(X) = 9 \times 3 = 27.
+$$
+\end{solutions}
+```{r, results='asis'}
+question_total()
+```
 
 
 
-
-```{r final_mark, cache=TRUE}
+<!-- Needed for total mark and number of questions -->
+```{r final_mark, cache=TRUE, cache.extra = exam_total}
 ET  <- exam_total
 ```
-```{r number_questions, cache=TRUE}
+```{r number_questions, cache=TRUE, cache.extra = number_Q}
 NQ  <- number_Q
 ```
 
@@ -97,7 +125,7 @@ NQ  <- number_Q
 
 **Appendix A**
 
-```{r}
+```{r, echo = TRUE}
 y <- rnorm(10)
 mean(y)
 ```
