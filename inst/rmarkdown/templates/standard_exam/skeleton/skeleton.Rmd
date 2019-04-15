@@ -6,6 +6,10 @@ courseNameShort: "Stat Model \\& Inference II"
 courseName: "Statistical Modelling \\& Inference II"
 courseID: "104843"
 catNo: "STATS 2107"
+multicourse: TRUE
+courseIDa: "111111"
+courseNamea: "Statistical Modelling and Inference (Hons)"
+catNoa: "STATS 4107"
 ExamTime: 120
 TotalTime: 130
 Q: "`r knitr::load_cache('number_questions', 'NQ')`"
@@ -13,7 +17,7 @@ marks: "`r knitr::load_cache('final_mark', 'ET')`"
 calculator: TRUE
 dict: TRUE
 cheatsheet: FALSE
-solutions: FALSE
+solutions: TRUE
 output: UoATemplates::standard_exam
 ---
 

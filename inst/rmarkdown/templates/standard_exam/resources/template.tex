@@ -28,30 +28,34 @@
 %%% \CourseID can be found via http://access.adelaide.edu.au
 \CourseID{$courseID$}
 
+
+
+
 %%% Specify up to 4 additional CourseIDs (a,b,c,d)
 %%% for courses using the same paper
-% \CourseIDa{103456}
 % \CourseIDb{103457}
 
 %%% Use a \CourseName of the form
 %%%
 % \CourseName[Topology]{Topology and Analysis III}
 %%%
-%%% if you would like "Topology" printed on the left hand side 
+%%% if you would like "Topology" printed on the left hand side
 %%% at the top of each page. Otherwise use a simple
 %%%
 % \Coursename{Topology and Analysis}
 %%%
 %%% and indicate whether or not *this* \Coursename should be printed
 %%% on the left hand side at the top of each following page using
-%%% the \setboolean{SubjectOnLeft}{true} line listed  below.  
+%%% the \setboolean{SubjectOnLeft}{true} line listed  below.
 \CourseName[$courseNameShort$]{$courseName$}
 
 %%% Specify up to 4 additional CourseNames for courses using the same paper
-%%% Specify a generic heading in the \CourseName[...] (above) if using 
-%%% same paper for multiple courses 
-% \CourseNamea{Topologia and Analytica III - Bradford}
+%%% Specify a generic heading in the \CourseName[...] (above) if using
+%%% same paper for multiple courses
 % \CourseNameb{Topologia and Analytica - PG}
+% $if(multicourse)$
+% \CourseNamea{$courseNameA$}
+% $endif$
 
 % See the comments for \CourseName above...
 \setboolean{SubjectOnLeft}{true}
@@ -61,11 +65,19 @@
 %%% Again, see Access Adelaide if you don't know this.
 \CatalogNbr{$catNo$}
 
+%% Info for multicourse - only two at present
+$if(multicourse)$
+\CourseIDa{$courseIDa$}
+\CourseNamea{$courseNamea$}
+\CatalogNbra{$catNoa$}
+$endif$
+
+
 %%% Specify up to 4 additional CatalogNbrs for courses using the same paper
 % \CatalogNbra{PURE MTH 3333BR}
 % \CatalogNbrb{PURE MTH 7333}
 
-%%% Uncomment the line it's a supp. ie, remove the "%" sign. 
+%%% Uncomment the line it's a supp. ie, remove the "%" sign.
 % \setboolean{SupplementaryExam}{true}
 
 %%% Uncomment the next line if it's a special exam paper
@@ -75,7 +87,7 @@
 %%% \readingtime is the number of minutes for reading the exam
 \readingtime{10}
 
-%%% \examtime is the number of minutes for writing solutions 
+%%% \examtime is the number of minutes for writing solutions
 \examtime{$ExamTime$}
 
 %%% \totaltime is \readingtime plus \examtime
@@ -87,15 +99,15 @@
 %%% \totalmarks is the total number of marks for the paper.
 \totalmarks{$marks$}
 
-%%% \nobooks gives the number of books to be used, but should 
-%%% **only be used when this number is greater than one**. 
+%%% \nobooks gives the number of books to be used, but should
+%%% **only be used when this number is greater than one**.
 % \nobooks{2}
 
 %%% \colorbooks can be Pink or Blue
 \colorbooks{Blue}
 
 %%% Uncomment the next line if a formula sheet will be provided
-% \formulasheet{yes} 
+% \formulasheet{yes}
 
 %%% Uncomment the next line if graph paper will be provided
 % \graphpaper{yes}
@@ -121,10 +133,9 @@ $endif$
 $if(cheatsheet)$
 \materialsb{A single A4 sheet of notes (double-sided, typed or handwritten) is allowed.}
 $endif$
-% \materialsa{More things to bring in}
 % \materialsb{And yet more materials}
 
-%%% Use this section if the exam has multiple parts 
+%%% Use this section if the exam has multiple parts
 %%%
 %\examparts{
 %\begin{tabular}{llll}
