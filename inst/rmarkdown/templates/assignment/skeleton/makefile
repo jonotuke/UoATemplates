@@ -1,7 +1,8 @@
 COURSENAME := SAM
 RMDS := $(wildcard $(COURSENAME)*.Rmd)
 QS := $(RMDS:.Rmd=.pdf)
-SOLS := $(RMDS:.Rmd=MS.pdf)
+SOLS := $(RMDS:.Rmd=S.pdf)
+MS := $(RMDS:.Rmd=MS.pdf)
 
 all: $(QS) $(SOLS) $(MS)
 
