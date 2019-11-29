@@ -1,0 +1,32 @@
+\usepackage{graphicx}
+\usepackage{color}
+
+
+% Define solutions
+\newenvironment{solutions}{
+  \vspace{0.5cm}
+  \color{blue}\hrule
+  \textbf{Solutions: \\}
+  }{
+  \vspace{0.5cm}
+  \hrule
+}
+
+% Define marking
+\newenvironment{marking}{
+  \vspace{0.5cm}
+  \color{red}\hrule
+  \textbf{Marking: \\}
+  }{
+  \vspace{0.5cm}
+  \hrule
+}
+
+
+\newcommand{\var}{\text{var}}
+\newcommand{\sd}{\text{sd}}
+\newcommand{\bin}[1][n,p]{\text{Bin}(#1)}
+\DeclareMathOperator{\E}{E}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\corr}{\text{corr}}
+\newcommand{\OR}{\cup}

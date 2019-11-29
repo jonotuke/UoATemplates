@@ -1,0 +1,4 @@
+name: lecture_slides_handouts
+description: >
+   Rmarkdown that will give slides, handouts and teacher notes.
+create_dir: FALSE

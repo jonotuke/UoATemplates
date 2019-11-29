@@ -1,0 +1,5 @@
+Name: Add question
+Description: Gives a question template for Rmarkdown
+Binding: question_template
+Interactive: false
+

@@ -1,0 +1,22 @@
+div.solutions {
+  border-bottom: 1px solid blue;
+  border-top: 1px solid blue;
+  font-weight: bold;
+  color: blue;
+}
+
+.solutions:before {
+  content:"Solutions:";
+}
+
+div.marking {
+  border-bottom: 1px solid red;
+  border-top: 1px solid red;
+  font-weight: bold;
+  color: red;
+}
+
+.marking:before {
+  content:"Marking:";
+
+}

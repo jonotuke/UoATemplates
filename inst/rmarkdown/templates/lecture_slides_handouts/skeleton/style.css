@@ -1,0 +1,14 @@
+div.teacher {
+  border-bottom: 1px solid blue;
+  border-top: 1px solid blue;
+  font-weight: bold;
+  color: blue;
+}
+
+.teacher:before {
+  content:"Teacher notes:";
+}
+
+div.handout {
+  color: orange ;
+}

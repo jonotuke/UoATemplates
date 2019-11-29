@@ -1,0 +1,13 @@
+**CHECKLIST**
+
+- $\Box$: Have you shown all of your working, including probability notation where necessary?
+- $\Box$: Have you given all numbers to 3 decimal places unless otherwise stated?
+- $\Box$: Have you included all R output and plots to support your answers where necessary?
+- $\Box$: Have you included all of your R code?
+- $\Box$: Have you made sure that all plots and tables each have a caption?
+- $\Box$: If before the deadline, have you submitted your assignment via the online submission on MyUni?
+- $\Box$: Is your submission a single pdf file - correctly orientated, easy to read? If not, penalties apply.
+- $\Box$: Penalties for more than one document - 10% of final mark for each extra document. Note that you may resubmit and your final version is marked, but the final document should be a single file.
+- $\Box$: Penalties for late submission - within 24 hours 40\% of final mark. After 24 hours, assignment is not marked and you get zero.
+- $\Box$: Assignments emailed instead of submitted by the online submission on MyUni will not be marked and will receive zero.
+- $\Box$: Have you checked that the assignment submitted is the correct one, as we cannot accept other submissions after the due date?

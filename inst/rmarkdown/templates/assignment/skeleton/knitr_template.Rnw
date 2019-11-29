@@ -1,0 +1,540 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amsfonts, url}
+\usepackage{graphicx}
+\usepackage{a4wide}
+\usepackage[parfill]{parskip}
+\usepackage{geometry}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usepackage{rotating}
+\usepackage{verbatim}
+\usepackage[parfill]{parskip}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{versions}
+\usepackage[disable]{todonotes}
+\usepackage[colorlinks=TRUE]{hyperref}
+% \usepackage{todonotes}
+
+
+\synctex=1
+
+\newcommand{\var}{\text{var}}
+\newcommand{\sd}{\text{sd}}
+\newcommand{\bin}[1][n,p]{\text{Bin}(#1)}
+\DeclareMathOperator{\E}{E}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\corr}{\text{corr}}
+\newcommand{\OR}{\cup}
+
+
+\newenvironment{solutions}{
+  \color{blue}
+}
+
+\excludeversion{solutions}
+
+\newcounter{total}
+\newcounter{totaltotal}
+
+\newcommand{\partmark}[1][1]{
+	\ifthenelse{\equal{#1}{1}}{
+		\hfill [#1 mark]
+	}{
+		\hfill [#1 marks]
+	}
+	\addtocounter{total}{#1}
+}
+\newcommand{\Qtotal}{
+\hfill{[Total: \thetotal]}
+\addtocounter{totaltotal}{\thetotal}
+\setcounter{total}{0}
+}
+\newcommand{\Atotal}{
+\hfill{[[Assignment total: \thetotaltotal]]}
+}
+
+\newcommand{\ms}[1][1]{{\color{red}[#1] }}
+\renewcommand{\ms}[1][1]{\relax}
+
+% ==================
+% = Start document =
+% ==================
+\begin{document}
+
+\begin{center}
+\textbf{STATS 1000 / STATS 1004 / STATS 1504\\
+Statistical Practice 1\\
+Assignment 1\\
+\the\year}
+\end{center}
+\textbf{DEADLINE:}
+\begin{itemize}
+	\item Wednesday 8$^{th}$ March \the\year\ (Week 2) 5:00pm
+\end{itemize}
+
+\input{checklist.tex}
+
+\newpage
+\begin{enumerate}
+
+\item {\bf Revision of some mathematical concepts}
+
+\emph{This question may be handwritten. Remember to scan and attach to rest of assignment.}
+
+\begin{enumerate}
+	\item For the following calculate $y$.
+
+<<include=FALSE>>=
+x <- 5; a <- 2; b <- 3
+@
+
+\begin{enumerate}
+	\item $y = \Sexpr{a} + \Sexpr{b}x, x = \Sexpr{x}$.
+	
+	\partmark[1]
+	
+	\begin{solutions}
+		$ y = \Sexpr{a} + \Sexpr{b}x = \Sexpr{a} + \Sexpr{b}\times \Sexpr{x} = \Sexpr{a} + \Sexpr{b*x} = \Sexpr{a+b*x}\ms$
+	\end{solutions}
+
+<<include=FALSE>>=
+b <- 3; x <- 3
+@
+
+	\item $y = \Sexpr{b}x, x = \Sexpr{x}$
+	
+	\partmark[1]
+	
+	\begin{solutions}
+		$y = \Sexpr{b} x = \Sexpr{b} \times \Sexpr{x}  = \Sexpr{b*x} \ms$
+	\end{solutions}
+
+<<include=FALSE>>=
+a <- 1; b <- 4; x <- 10
+@
+
+	\item $y = a + bx, a = \Sexpr{a} , b = \Sexpr{b} , x = \Sexpr{x} $
+	
+	\partmark[1]
+	
+	\begin{solutions}
+		$y = a + bx = \Sexpr{a}  + \Sexpr{b}  \times \Sexpr{x}  
+		= \Sexpr{a}  + \Sexpr{b*x}  = \Sexpr{a+b*x} \ms$
+	\end{solutions}
+
+	
+<<include=FALSE>>=
+a <- 1; x <- 9; b <- 4
+@
+	\item $y = \frac{x-a}{b}, x = \Sexpr{x} , a = \Sexpr{a} , b = \Sexpr{b} $
+	
+	\partmark[1]
+	
+	\begin{solutions}
+		$y = \frac{x-a}{b} = \frac{\Sexpr{x} - \Sexpr{a} }{\Sexpr{b} } = 
+		\frac{\Sexpr{x-a} }{\Sexpr{b} } = \Sexpr{(x-a)/b} \ms$
+	\end{solutions}
+\end{enumerate}
+
+\item Calculate the following proportions.
+
+\begin{enumerate}
+
+\item A die is rolled 20 times and the number of 6s is 5.
+
+\partmark[1]
+
+\begin{solutions}
+	$5/20 = 0.250\ms$
+\end{solutions}
+\item Of 200 puppies advertised on Gumtree, 43 were free.
+
+\partmark[1]
+
+\begin{solutions}
+	$43/200 = 0.215\ms$
+\end{solutions}
+\end{enumerate}
+
+<<include=FALSE>>=
+a <- 100; b <- 2; x <- 150
+@
+
+
+\item A hire car costs \$\Sexpr{a}  for insurance and \$\Sexpr{b}  per kilometre driven. 
+\begin{enumerate}
+\item If the total cost is represented by $y$ and the number of kilometres driven is represented by $x$, write an equation of the form $y= a + bx$ that can be used to calculate the total cost.
+
+\partmark[1]
+
+\begin{solutions}
+	$y = \Sexpr{a}  + \Sexpr{b} x\ms$
+\end{solutions}
+
+\item If you drive \Sexpr{x}km, what is the total cost?
+
+\partmark[1]
+
+\begin{solutions}
+	$y = \Sexpr{a}  + \Sexpr{b} x = \Sexpr{a}  + \Sexpr{b} \times \Sexpr{x}  
+	= \Sexpr{a}  + \Sexpr{b*x}  = \$\Sexpr{a+b*x} \ms$
+\end{solutions}
+\item If you sit in the car, but do not drive it, what is the total cost?
+
+\partmark[1]
+
+\begin{solutions}
+	$y = \Sexpr{a}  + \Sexpr{b} x = \Sexpr{a}  + \Sexpr{b} \times 0 = \$\Sexpr{a} \ms.$
+\end{solutions}
+\end{enumerate}
+
+\end{enumerate}
+
+\Qtotal
+
+\item {\bf Rat data in {\sc SPSS} - Practical 1}
+
+\emph{This question must be typed up in Word}
+
+
+To measure the effects of ozone on weight, one group of 70-day-old  rats was kept in an environment containing ozone for 7 days. A second group of rats of the same age (the control group) was kept in an ozone-free environment for the same time. The weight gains (to the nearest {\it gram}) were as follows. 
+
+
+\begin{tabular}{c|cccccccccccc}
+{\it Control\ Group}&41& 26& 13& -17& 15& 22& 29& 26&
+38& 22& 27& 17\\
+(n=23)& 27& 18& 21& 27& 25& 18& 29& 22& 19& 26& 23&\\
+\hline
+{\it Ozone\ Group}& 10& 7& -10& 18& 7& 40& -15& -9&
+6&\ 14& 7&\\
+(n=22)&-13& 12& -16& 44& 20& 16& 28& 14& 16& 55& -9&\\
+\hline\\
+\end{tabular}
+
+\begin{enumerate}
+\item
+ \begin{enumerate}
+  \item What are the subjects? How many are there?
+
+  \partmark[2]
+
+  \begin{solutions}
+  	The subjects are the rats\ms. There are 45 subjects.\ms
+  \end{solutions}
+  \item How many variables are there? What are they and what type of variable is each one?
+
+  \partmark[4]
+
+  \begin{solutions}
+  	There are two variables:
+  	\begin{itemize}
+  		\item Weight gain\ms\  - quantitative, continuous variable\ms.
+  		\item Group\ms\  - categorical, nominal variable\ms.
+  	\end{itemize}
+  \end{solutions}
+ \end{enumerate}
+\item Enter the data directly into SPSS. 
+
+\emph{You do not need to give any output for this part in your assignment.}
+
+\item What is the sample mean weight gain of all the rats?
+
+\partmark[2]
+
+\begin{solutions}
+	The mean weight gain is 16.8\ms\ grams\ms.
+\end{solutions}
+
+\item What is the sample standard deviation of the weight gain of all the rats?
+
+\partmark[2]
+
+\begin{solutions}
+	The sample standard deviation of the weight gain is 16.28\ms\ grams\ms.
+\end{solutions}
+
+\item What is the minimum and maximum weight gain of all the rats?
+
+\partmark[3]
+
+\begin{solutions}
+	The minimum is -17 grams and the maximum is 55 grams.
+	
+	\ms[1 for -17; 1 for 55; 1 for units]
+\end{solutions}
+
+\item Produce a side-by-side box-plot of the weight gain for each group. Include your captioned plot in your answer. 
+
+
+\emph{Captions should include three parts - (1) what type of plot it is. e.g. box-plot / histogram etc, (2) the variables in the plot, and (3) the subjects.}
+
+\partmark[2]
+
+Using this plot, answer the following questions:
+
+\begin{solutions}
+
+The side-by-side box-plot is given in Figure~\ref{fig:ratsBP}. 
+
+\ms[1 for plot, 1 for caption.]
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=0.95\textwidth]{../fig/rats_BP.png}
+		\caption{Side-by-side box-plots of weight gain for the two groups of rats.}
+		\label{fig:ratsBP}
+	\end{figure}
+\end{solutions}
+
+\begin{enumerate}
+	\item Which group has the highest median weight gain?
+
+	\partmark[1]
+
+	\begin{solutions}
+		The control\ms\ group.
+	\end{solutions}
+
+	\item Which group has the largest IQR?
+
+	\partmark[1]
+
+	\begin{solutions}
+		The ozone group\ms.
+	\end{solutions}
+
+	\item Are there any potential outliers? If so, how many are there; which group are they in; and what are their weight gains?
+
+	\partmark[4]
+
+	\begin{solutions}
+		There are two\ms\ potential outliers in the control group\ms: one with a weight gain of -17 grams\ms\ and one with a weight gain of 41 grams\ms.
+	\end{solutions}
+
+	\item Overall do you think that exposure to ozone causes weight gain or weight loss in rats? Justify your conclusion.
+
+	\partmark[1]
+
+	\begin{solutions}
+Exposure to ozone causes weight loss or lower weight gain as the average weight gain appears lower for rats exposed to ozone compared to the control group.
+
+	\end{solutions}
+	
+	\item Presentation mark for typed up in Word
+	
+	\partmark[1]
+
+	\begin{solutions}
+		Must be typed and well written for full marks.\ms[1]
+	\end{solutions}
+	\Qtotal
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+\item {\bf Types of variables}
+
+\emph{This question may be handwritten}
+
+For each of the following: decide if the variable is quantitative or categorical. 
+
+If they are quantitative, are they discrete or continuous? 
+
+If they are categorical, are they nominal or ordinal?
+
+\begin{enumerate}
+	\item Number of zombies in the first 24 hours of the zombie apocalypse.
+
+	\partmark[2]
+
+	\begin{solutions}
+		Quantitative discrete\ms[2]
+	\end{solutions}
+
+	\item Daily maximum temperature in Adelaide.
+	
+	\partmark[2]
+
+	\begin{solutions}
+		Quantitative continuous\ms[2].
+	\end{solutions}
+
+	\item Types of cocktails.
+
+	\partmark[2]
+
+	\begin{solutions}
+		Categorical nominal\ms[2].
+	\end{solutions}
+	
+
+		\Qtotal
+\end{enumerate}
+
+%\item {\bf Basic summary statistics by hand}
+%
+%\emph{Note: for full marks you must show all of your working.}
+%
+%\emph{This question maybe handwritten}
+%
+%Shown below are measurements of blood cholesterol in mg/dL for 15 people.
+%\begin{verbatim}
+%270 236 210 142 280 272 160 220 226 242 186 266 206 318 294
+%\end{verbatim}
+%\begin{enumerate}
+%\item Calculate the sample mean for these numbers.
+%
+%\partmark[2]
+%
+%\begin{solutions}
+%	\begin{align*}
+%	    \bar x&=\frac{1}{15}(270+236+\ldots+294)\\
+%	    &=\frac{3528}{15}=235.2 mg/dL\ms[2: \text{1 for working, 1 for answer}].
+%	\end{align*}
+%\end{solutions}
+%
+%\item Calculate the five number summary and the IQR.
+%
+%\partmark[6]
+%
+%\begin{solutions}
+%
+%The sorted data are
+%\[
+%142\ 160\ 186\ \framebox{206}\ 210\ 220\ 226\ \framebox{236}\ 242\ 266\ 270\ \framebox{272}\ 280\ 294\ 318
+%\]
+%The five number summary is
+%\begin{description}
+%\item[min:] $142$ mg/dL\ms
+%\item[\(Q_1\):] $206$ mg/dL\ms
+%\item[\(M\):] $236$ mg/dL\ms
+%\item[\(Q3\):] $272$ mg/dL \ms
+%\item[max:] 318mg/dL\ms
+%\end{description}
+%The IQR is IQR=$272-206=66$ mg/dL \ms.
+%
+%\end{solutions}
+%\Qtotal
+%\end{enumerate}
+
+%\item {\bf Identification of outliers}
+%
+%In practice, data sets often contain errors that can arise for a number of
+%reasons. For example, data entry errors, misrecording of information, instrument errors, incorrect units and so on. An important first step in a statistical analysis is to check the data for errors and inconsistencies that can be corrected or removed before the main analysis is performed.
+%
+%To illustrate this we are going to look at the results from a data set that
+%looks at blood results from 178 elderly patients. If you would like to
+%reproduce the graphs given in this question, the data is contained in the file
+%{\tt calcium.xlsx}.
+%
+%The study is described in Boyd, J., Delost, M., and Holcomb, J., (1998) ``Calcium, phosphorus, and alkaline phosphatase laboratory values of elderly subjects''Clinical Laboratory Science, 11, 223-227.
+%
+%The variables in the dataset and there possible values are:
+%\begin{description}
+%\item[Age] in years;
+%\item[Sex] 1 = Male, 2 = Female;
+%\item[AlkPhos] Blood concentration of
+%Alkaline Phosphatase in international units/L;
+%\item[Lab] Laboratory:  1=Metpath; 2=Deyor; 3=St. Elizabeth's; 4=CB Rouche;
+%5=YOH; 6=Horizon;
+%\item[CaMol] Blood concentration of Calcium in mmol/L
+%\end{description}
+%
+%\begin{enumerate}
+%\item The data has been imported in {\sc SPSS} and the frequencies of sex and lab are given in Table~\ref{fig:calciumFreq}. From these two tables identify if there are any cases where the sex or lab has probably been entered incorrectly. Also are there any cases with missing values?
+%
+%\partmark[3]
+%
+%\begin{solutions}
+%	\begin{itemize}
+%\item The frequency distribution of Sex in Table~\ref{fig:calciumFreq}
+% shows that the values 12, 21 and 22 each occur once. These
+%are not valid values and are most likely data entry errors.\ms
+%\item The frequency distribution of Lab in Table~\ref{fig:calciumFreq}
+% shows that the values 21 and 43 each occur once. These are
+%also not valid values and are most likely data entry errors.\ms
+%\item There is also a single missing value that corresponds to a row where no value was entered for that variable.\ms
+%\end{itemize}
+%\end{solutions}
+%
+%
+%
+%
+%\item A histogram of {\tt Age} (Figure~\ref{fig:calciumAge}) and Alkaline Phosphatase (Figure~\ref{fig:calciumAP}) are given. Identify any points that are potential outliers.
+%
+%\partmark[2]
+%
+%\begin{solutions}
+%	\begin{itemize}
+%		\item The histogram of Age in Figure~\ref{fig:calciumAge} shows three suspicious values (699, 730, 731).\ms
+%		\item The histogram of AlkPhos in Figure~\ref{fig:calciumAP} shows a number of outliers (9, 213, 219).\ms
+%	\end{itemize}
+%\end{solutions}
+%
+%
+%
+%\item The consultant statistician who analysed the data was sure that the potential outliers in Age were errors, but decided to check with the researchers about the Alkaline Phosphatase. Why do you think this was the case?
+%
+%
+%\partmark[2]
+%
+%\begin{solutions}
+%	Ages of 699, 730 and 731 are not valid values and are clearly errors, while values of Alkaline Phosphatase of 9, 213, 219 may be valid and so should be checked.
+%\end{solutions}
+%
+%\item Finally we have plotted side-by-side box-plots of blood calcium concentrations for different labs (Figure~\ref{fig:calciumBP}). We have also plotted the same box-plots with lab 3 removed (Figure~\ref{fig:calciumBP2}). Why do you think the box-plots are so different?
+%
+%\partmark[2]
+%
+%\begin{solutions}
+%	Lab 3 looks to have very high blood calcium concentrations. These large values are pushing the results from the other labs down.
+%
+%	\ms[2 for any reasonable discussion]
+%
+%\end{solutions}
+%	\Qtotal
+
+
+
+%\begin{table}[htbp]
+%  	\centering
+%  	\includegraphics[width=0.95\textwidth]{../figs/calciumFreq.pdf}
+%  	\caption{Frequencies for Sex and Lab}
+%  	\label{fig:calciumFreq}
+%  \end{table}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=0.95\textwidth]{../figs/calciumAge.pdf}
+%	\caption{Histogram of Age}
+%	\label{fig:calciumAge}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=0.95\textwidth]{../figs/calciumAP.pdf}
+%	\caption{Histogram of Alkaline Phosphatase}
+%	\label{fig:calciumAP}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=0.95\textwidth]{../figs/calciumBP.pdf}
+%	\caption{Side-by-side box-plots of blood Calcium concentration levels for different labs.}
+%	\label{fig:calciumBP}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=0.95\textwidth]{../figs/calciumBP2.pdf}
+%	\caption{Side-by-side box-plots of blood Calcium concentration levels for different labs with lab 3 removed.}
+%	\label{fig:calciumBP2}
+%\end{figure}
+%\end{enumerate}
+
+\end{enumerate}
+\Atotal
+
+\end{document}

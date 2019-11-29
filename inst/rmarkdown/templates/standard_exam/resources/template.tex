@@ -78,7 +78,9 @@ $endif$
 % \CatalogNbrb{PURE MTH 7333}
 
 %%% Uncomment the line it's a supp. ie, remove the "%" sign.
-% \setboolean{SupplementaryExam}{true}
+$if(supp)$
+\setboolean{SupplementaryExam}{true}
+$endif$
 
 %%% Uncomment the next line if it's a special exam paper
 % \setboolean{SpecialExam}{true}
@@ -161,6 +163,7 @@ $endif$
 \newcommand{\var}{\text{Var}}
 \newcommand{\MSE}{\text{MSE}}
 \newcommand{\E}{\text{E}}
+\newcommand{\mpe}{\text{MPE}}
 
 \newenvironment{solutions}{
 \color{red}Solution:

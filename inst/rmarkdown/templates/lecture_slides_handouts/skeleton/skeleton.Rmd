@@ -1,0 +1,74 @@
+---
+title: "Lecture slides"
+author: "Jono Tuke"
+date: "11/08/2019"
+output:
+  html_document: 
+    css: style.css
+    theme: spacelab
+  pdf_document:
+    includes:
+      in_header: header.tex
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+params: 
+  teacher: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  fig.width = 6, 
+  fig.asp = 0.618, 
+  out.width = "70%",
+  fig.align = "center", 
+  root.dir = '../'
+)
+pacman::p_load(tidyverse)
+```
+
+
+```{r, include=FALSE}
+output_format = knitr::opts_knit$get("rmarkdown.pandoc.to")
+if(output_format == "html"){
+  teacher  <- TRUE
+  handout  <- TRUE
+  
+}
+if(output_format == "beamer"){
+  teacher  <- FALSE
+  handout  <- FALSE
+}
+if(output_format == "latex"){
+  teacher  <- params$teacher
+  handout  <- TRUE
+}
+```
+
+## First slide
+
+This is a slide
+
+1. Item
+2. Item
+
+```{block, type = "teacher", include= teacher}
+This is teacher notes. 
+
+We can have maths
+
+$$
+y = x^2
+$$
+```
+
+```{block, type = "handout", include = handout}
+These are extra notes on the slides
+
+Again we can have maths
+
+$$
+y = x^2
+$$
+```

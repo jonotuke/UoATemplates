@@ -14,6 +14,7 @@ ExamTime: 120
 TotalTime: 130
 Q: "`r knitr::load_cache('number_questions', 'NQ')`"
 marks: "`r knitr::load_cache('final_mark', 'ET')`"
+supp: FALSE
 calculator: TRUE
 dict: TRUE
 cheatsheet: FALSE
