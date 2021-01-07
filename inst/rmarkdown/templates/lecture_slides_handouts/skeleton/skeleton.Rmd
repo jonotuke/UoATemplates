@@ -31,6 +31,9 @@ pacman::p_load(tidyverse)
 
 ```{r, include=FALSE}
 output_format = knitr::opts_knit$get("rmarkdown.pandoc.to")
+if(length(output_format) == 0){
+  output_format  <- "html"
+}
 if(output_format == "html"){
   teacher  <- TRUE
   handout  <- TRUE

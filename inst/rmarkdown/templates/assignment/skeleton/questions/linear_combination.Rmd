@@ -1,0 +1,49 @@
+# Linear combination question
+
+Consider a random variable $X$ with 
+
+$$
+\E[X] = \mu \text{ and } \var(X) = \sigma^2, 
+$$
+
+and let
+
+$$
+Y = a + bX
+$$
+
+## Part a
+
+Calculate $\E[Y]$.
+
+MARKS: 1
+
+SOLUTION
+
+$$
+\begin{aligned}
+\E[Y] &= \E[a + bX]\\
+& = a + b\E[X]\\
+& = a + b\mu.
+\end{aligned}
+$$
+
+END
+
+## Part b
+
+Calculate $\var(Y)$.
+
+MARK: 2
+
+SOLUTION
+
+$$
+\begin{aligned}
+\var[Y] &= \var[a + bX]\\
+& = b^2\var[X]\\
+& = b^2\sigma^2.
+\end{aligned}
+$$
+
+END

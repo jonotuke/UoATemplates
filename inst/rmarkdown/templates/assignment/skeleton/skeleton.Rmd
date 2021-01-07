@@ -1,7 +1,8 @@
 ---
-title: "STATS ?? : Course name : Assignment ?"
-author: "Jono Tuke"
-date: "Semester 1 20??"
+title: "COURSENAME"
+subtitle: "ASSIGN"
+author: "LECTURER"
+date: "SEM YEAR"
 output:
   pdf_document:
     includes:
@@ -28,112 +29,8 @@ A_total  <- 0
 
 ---
 
-**Due date: Friday 22nd March 2019 (Week 3), 5pm.**
+**Due date: DUEDATE**
 
 --- 
-
-1. Consider a random variable $X$ with 
-
-$$
-\E[X] = \mu \text{ and } \var(X) = \sigma^2, 
-$$
-
-and let
-
-$$
-Y = a + bX
-$$
-
-a. Calculate $\E[Y]$.
-
-```{r, results='asis', echo=FALSE}
-add_marks(1)
-```
-
-```{block, type = "solutions", include= params$sol}
-$$
-\begin{aligned}
-\E[Y] &= \E[a + bX]\\
-& = a + b\E[X]\\
-& = a + b\mu.
-\end{aligned}
-$$
-```
-
-```{block, type = "marking", include = params$marking}
-1 for answer
-```
-
-b. Calculate $\var(Y)$.
-
-```{r, results='asis', echo=FALSE}
-add_marks(1)
-```
-
-```{block, type = "solutions", include= params$sol}
-$$
-\begin{aligned}
-\var[Y] &= \var[a + bX]\\
-& = b^2\var[X]\\
-& = b^2\sigma^2.
-\end{aligned}
-$$
-```
-
-```{block, type = "marking", include = params$marking}
-1 for answer
-```
-
-```{r, results='asis', echo=FALSE}
-add_Q_total()
-```
-
-2. The following analysis is performed in R
-
-```{r}
-pacman::p_load(tidyverse)
-data(mpg)
-mpg_lm  <- lm(cty ~ displ, data = mpg)
-summary(mpg_lm)
-```
-
-a. Write the line of least squares.
-
-```{r, results='asis', echo=FALSE}
-add_marks(1)
-```
-
-```{block, type = "solutions", include= params$sol}
-cty = 25.9915 - 2.6305 displ
-```
-
-
-```{block, type = "marking", include = params$marking}
-Needs to be in context for mark. 
-```
-
-b. What is the command to obtain the 95% prediction interval for city fuel efficiency for a displacement of 3 litres?
-
-```{r, results='asis', echo=FALSE}
-add_marks(1)
-```
-
-```{block, type = "solutions", include= params$sol}
-```
-```{r, include= params$sol}
-predict(mpg_lm, newdata = tibble(displ = 3), interval = "prediction")
-```
-
-```{block, type = "marking", include = params$marking}
-complete command needed. 
-```
-
-```{r, results='asis', echo=FALSE}
-add_Q_total()
-```
-
-```{r, results='asis', echo=FALSE}
-add_A_total()
-```
 
 

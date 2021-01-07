@@ -1,0 +1,37 @@
+# Linear regression question
+
+The following analysis is performed in R
+```{r}
+pacman::p_load(tidyverse)
+data(mpg)
+mpg_lm  <- lm(cty ~ displ, data = mpg)
+summary(mpg_lm)
+```
+
+## Part a
+
+Write the line of least squares.
+
+MARKS: 1
+
+SOLUTION
+
+cty = 25.9915 - 2.6305 displ
+
+END
+
+## Part b
+
+What is the command to obtain the 95% prediction interval for city fuel efficiency for a displacement of 3 litres?
+
+MARKS: 1
+
+SOLUTION
+
+Using the command
+
+```{r}
+predict(mpg_lm, newdata = tibble(displ = 3), interval = "prediction")
+```
+
+END

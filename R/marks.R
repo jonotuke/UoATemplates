@@ -13,7 +13,11 @@
 #' total
 marks  <- function(x){
   ## Add marks to exam page
-  mark_str  <- str_c("\\marks{", x, "}")
+  if(x == 1){
+    mark_str  <- str_c("\\mark{}")
+  } else {
+    mark_str  <- str_c("\\marks{", x, "}")
+  }
   cat(mark_str, "\n\n")
   ## Update the marking table
   total  <<- total + x

@@ -1,0 +1,14 @@
+title: "UoA templates"
+description: "Templates for teaching statistics and data science at UoA."
+author: "Jono Tuke"
+opengraph:
+  image:
+    src: "https://example.com/pkg/batpig.png"
+  twitter:
+    card: summary
+    creator: "@dataandme"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to poolnoodlr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
